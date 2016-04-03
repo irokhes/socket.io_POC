@@ -3,8 +3,10 @@ var express = require('express');
 var app = express();
 var http  =  require('http').Server(app);
 var path = require('path');
-var io = require('socket.io').listen(http);
+var redis = require('socket.io-redis');
 
+var io = require('socket.io').listen(http);
+io.adapter(redis({ host: 'localhost', port: 6379 }));
 //Lets define a port we want to listen to
 const PORT=8080; 
 
